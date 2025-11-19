@@ -39,8 +39,19 @@
     const email = ref(null);
     const github = ref(null);
     const linkedin = ref(null);
+    const ueberMich = ref(null);
+    const card = ref([]);
     
     let smoother;
+
+    const {data: projects} = useFetch("https://effortless-courage-3e867d4d9f.strapiapp.com/api/projects?populate=*", 
+        {
+            headers: {
+                Authorization: `Bearer ${process.env.TOKEN}`
+            }
+        }
+    )
+
 
 
 
@@ -57,7 +68,25 @@
             wrapper: '#smooth-wrapper',
             content: "#smooth-content",
             smooth: 0.7
-        })
+        });
+
+        const projektContainer = document.querySelector('.projekt-container'); // Füge diese Klasse hinzu
+    
+        if (projektContainer) {
+            gsap.to(projektContainer, {
+                x: () => -(projektContainer.scrollWidth - window.innerWidth),
+                ease: "none",
+                scrollTrigger: {
+                    trigger: projektContainer,
+                    start: "top 10%",
+                    end: () => `+=${projektContainer.scrollWidth - window.innerWidth}`,
+                    scrub: 1,
+                    pin: true,
+                    anticipatePin: 1,
+                    invalidateOnRefresh: true
+                }
+            });
+        }
 
 
         gsap.from(splitHeadline.value.chars, {
@@ -90,7 +119,7 @@
             ease: "power2.inOut"
         })
 
-        gsap.from(splitNav.value.words,{
+        gsap.from(nav.value,{
             y: -200,
             duration: 0.5,
             delay: 1.25,
@@ -238,7 +267,22 @@
             ease: "power2.inOut",
             delay: 0.35,
             scrollTrigger: picWrapper.value,            
-        })  
+        }) 
+
+
+        card.value.forEach((cardComponent) => {
+            if (cardComponent?.root) {
+                gsap.to(cardComponent.root, {
+                    rotation: Math.floor(Math.random() * 10) - 3,
+                    duration: 0,
+                    
+                    ease: "power2.inOut",
+                    scrollTrigger: cardComponent.root
+                });
+            }
+        });
+        
+      
     })
 
     const hoverNav = (e) => {
@@ -332,6 +376,26 @@
         })
     }
 
+    const clickHome = () => {
+        smoother.scrollTo(0, true)
+    }
+
+    const clickAbout = () => {
+        smoother.scrollTo(ueberMich.value, true)
+    }
+
+    const openGit = () => {
+        window.open("https://github.com/Nico09322", "_blank", "noopener,noreferrer")
+    }
+
+    const openMail = () => {
+        window.location.href = "mailto:mail@nicopies.de"
+    }
+
+    const openLinkedIn = () => {
+        window.open("https://www.linkedin.com/in/nico-pies-688228275/", "_blank", "noopener,noreferrer")
+    }
+
 </script>
 
 <template>
@@ -342,14 +406,34 @@
                                 <img :src="bild" class="w-[2.9rem] rounded-full"/>
                             </div>
                             <div ref="nav" class="flex flex-row gap-[3rem] font-taviraj text-[#454545]">
-                                <div ref="navOpt" class="overflow-hidden h-[1.5rem] cursor-pointer" @mouseenter="hoverNav" @mouseleave="leaveNav">
-                                    <p class="leading-0">Home</p>
-                                    <p class="leading-0 text-[#EFA00B]">Home</p>
+                                <div @click="clickHome" class="cursor-pointer group hover:scale-110 duration-150">
+                                    <span class="group-hover:text-[#EFA00B] duration-150">H</span>
+                                    <span class="group-hover:text-[#D65108] duration-150">O</span>
+                                    <span class="group-hover:text-[#591F0A] duration-150">M</span>
+                                    <span class="group-hover:text-[#0267C1] duration-150">E</span>
                                 </div>
-                                <p>ÜBER MICH</p>
-                                <p>PROJEKTE</p>
+                                <div @click="clickAbout" class="cursor-pointer group hover:scale-110 duration-150">
+                                    <span class="group-hover:text-[#EFA00B] duration-150">Ü</span>
+                                    <span class="group-hover:text-[#D65108] duration-150">B</span>
+                                    <span class="group-hover:text-[#591F0A] duration-150">E</span>
+                                    <span class="group-hover:text-[#0267C1] duration-150">R</span>&nbsp;
+                                    <span class="group-hover:text-[#EFA00B] duration-150">M</span>
+                                    <span class="group-hover:text-[#D65108] duration-150">I</span>
+                                    <span class="group-hover:text-[#591F0A] duration-150">C</span>
+                                    <span class="group-hover:text-[#0267C1] duration-150">H</span>                                    
+                                </div>
+                                <div @click="clickHome" class="cursor-pointer group hover:scale-110 duration-150">
+                                    <span class="group-hover:text-[#EFA00B] duration-150">P</span>
+                                    <span class="group-hover:text-[#D65108] duration-150">R</span>
+                                    <span class="group-hover:text-[#591F0A] duration-150">O</span>
+                                    <span class="group-hover:text-[#0267C1] duration-150">J</span>
+                                    <span class="group-hover:text-[#EFA00B] duration-150">E</span>
+                                    <span class="group-hover:text-[#D65108] duration-150">K</span>
+                                    <span class="group-hover:text-[#591F0A] duration-150">T</span>
+                                    <span class="group-hover:text-[#0267C1] duration-150">E</span>                                    
+                                </div>
                             </div>
-                        </div>
+                </div>
                         <div ref="navDivider" class="w-full h-[0.15rem] bg-[#F5F0E4]"></div>
                         <div class="flex flex-col gap-[2rem] justify-center items-center w-full h-[100vh]">
                             <div class="overflow-hidden">
@@ -423,7 +507,7 @@
                             </div>
                         </div>
                 <div class="mt-[10rem] h-[50rem] flex items-center flex-col relative">
-                    <h2 class="font-kavoon text-[3rem]"><span class="text-[#D65108]">ÜBER</span> <span class="text-[#591F0A]">MICH</span></h2>
+                    <h2 ref="ueberMich" class="font-kavoon text-[3rem]"><span class="text-[#D65108]">ÜBER</span> <span class="text-[#591F0A]">MICH</span></h2>
                     <div ref="picWrapper" class="p-[1rem] bg-[#EFA00B] rounded-lg relative mt-[8rem] z-20"> 
                         <img :src="bildGroß" alt="" class="rounded-lg w-[20rem]"/>
                             <svg ref="picScribble" class="absolute top-[3.5rem] right-[7.8rem] z-10 scale-[145%]" width="71" height="90" viewBox="0 0 71 90" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -478,20 +562,34 @@
                             <Icon name="skill-icons:figma-dark" class="w-[2rem] h-[2rem]"/>
                             <p>Figma</p>
                         </div>  
-                        <div ref="email" class="bg-[#33ADFF] w-[7.5rem] h-[4rem] rounded-lg flex flex-row items-center p-[1rem] gap-3 z-0 absolute top-[3rem] right-[5rem] hover:shadow-[10px_10px_0px_0px_rgba(0,_0,_0,_1)] hover:duration-200" @mouseenter="emailHover" @mouseleave="emailLeave">
+                        <div ref="email" class="bg-[#33ADFF] w-[7.5rem] h-[4rem] rounded-lg flex flex-row items-center p-[1rem] gap-3 z-0 absolute top-[3rem] right-[5rem] hover:shadow-[10px_10px_0px_0px_rgba(0,_0,_0,_1)] hover:duration-200" @mouseenter="emailHover" @mouseleave="emailLeave" @click="openMail">
                             <Icon name="dashicons:email" class="w-[2rem] h-[2rem]"/>
                             <p>Email</p>
                         </div> 
-                        <div ref="github" class="bg-[#0267C1] w-[8rem] h-[4rem] rounded-lg flex flex-row items-center p-[1rem] gap-3 z-0 absolute top-[4rem] right-[5rem] hover:shadow-[10px_10px_0px_0px_rgba(0,_0,_0,_1)] hover:duration-200" @mouseenter="emailHover" @mouseleave="emailLeave">
+                        <div ref="github" class="bg-[#0267C1] w-[8rem] h-[4rem] rounded-lg flex flex-row items-center p-[1rem] gap-3 z-0 absolute top-[4rem] right-[5rem] hover:shadow-[10px_10px_0px_0px_rgba(0,_0,_0,_1)] hover:duration-200" @mouseenter="emailHover" @mouseleave="emailLeave" @click="openGit">
                             <Icon name="ri:github-fill" class="w-[2rem] h-[2rem]"/>
                             <p>Github</p>
                         </div>                                                                                                     
-                        <div ref="linkedin" class="bg-[#33ADFF] w-[9rem] h-[4rem] rounded-lg flex flex-row items-center p-[1rem] gap-3 z-0 absolute top-[5rem] right-[5rem] hover:shadow-[10px_10px_0px_0px_rgba(0,_0,_0,_1)] hover:duration-200" @mouseenter="emailHover" @mouseleave="emailLeave">
+                        <div ref="linkedin" class="bg-[#33ADFF] w-[9rem] h-[4rem] rounded-lg flex flex-row items-center p-[1rem] gap-3 z-0 absolute top-[5rem] right-[5rem] hover:shadow-[10px_10px_0px_0px_rgba(0,_0,_0,_1)] hover:duration-200" @mouseenter="emailHover" @mouseleave="emailLeave" @click="openLinkedIn">
                             <Icon name="mdi:linkedin" class="w-[2rem] h-[2rem]"/>
                             <p>LinkedIn</p>
                         </div>  
                     </div>
-                </div>     
+                </div>
+                <div class="mt-[10rem]">
+
+                    <div class="projekt-wrapper overflow-hidden mb-[5rem]">
+                        <div class="projekt-container flex flex-col">
+                            <h2 class="flex justify-center font-kavoon text-[3rem] text-[#D65108]">PROJEKTE</h2>
+                            <div class="flex flex-row gap-[2rem] h-[100vh] mt-[5rem] ml-[5rem] pr-[10rem]">
+                                <Projekt ref="card" v-for="project in projects.data" :name="project.Title" :url="project.Hero.url" :desc="project.Description" :skills="project.Skills"/>                            
+                            </div>
+
+                        </div> 
+                    </div>
+                </div> 
+
+  
             </div>
         </div>  
 </template>
