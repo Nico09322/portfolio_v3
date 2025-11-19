@@ -7,5 +7,12 @@ export default defineNuxtConfig({
     '@nuxt/hints',
     '@nuxt/icon',
     '@nuxtjs/tailwindcss'
-  ]
+  ],
+  fonts: {
+    families: [
+      {name: 'Taviraj', provider: 'google', weights: ['100','200','300','400','500','600','700','800','900']},
+      {name: 'Kavoon', provider: 'google'},
+      {name: 'Raleway', provider: 'google', weights: ['100','200','300','400','500','600','700','800','900']}
+    ]
+  }
 })
