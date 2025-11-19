@@ -33,6 +33,12 @@
     const nuxt = ref(null);
     const vue = ref(null);
     const tailwind = ref(null);
+    const strapi = ref(null);
+    const supabase = ref(null);
+    const figma = ref(null);
+    const email = ref(null);
+    const github = ref(null);
+    const linkedin = ref(null);
     
     let smoother;
 
@@ -101,10 +107,10 @@
         })
 
         gsap.from(scrollRef.value.querySelectorAll("path"), {
-            duration: 0.2, 
+            duration: 0.15, 
             drawSVG:0,
             ease: "power2.inOut",
-            stagger: 0.2,
+            stagger: 0.15,
             delay: 2
         })
 
@@ -166,13 +172,73 @@
 
         gsap.to(tailwind.value, {
             x: -100,
-            y: -60,
+            y: -75,
             rotate: -7,
             duration: 0.75,
             ease: "power2.inOut",
             delay: 0.25,
             scrollTrigger: picWrapper.value,            
         })
+
+        gsap.to(strapi.value, {
+            x: 20,
+            y: -40,
+            rotate: 2,
+            duration: 0.75,
+            ease: "power2.inOut",
+            delay: 0.25,
+            scrollTrigger: picWrapper.value,            
+        })    
+
+        gsap.to(supabase.value, {
+            x: -280,
+            y: -150,
+            rotate: -15,
+            duration: 0.75,
+            ease: "power2.inOut",
+            delay: 0.25,
+            scrollTrigger: picWrapper.value,            
+        })    
+
+        gsap.to(figma.value, {
+            x: -170,
+            y: -130,
+            rotate: -10,
+            duration: 0.75,
+            ease: "power2.inOut",
+            delay: 0.25,
+            scrollTrigger: picWrapper.value,            
+        })
+        
+        gsap.to(email.value, {
+            x: -430,
+            y: -100,
+            rotate: -5,
+            duration: 0.75,
+            ease: "power2.inOut",
+            delay: 0.25,
+            scrollTrigger: picWrapper.value,            
+        })
+
+        gsap.to(github.value, {
+            x: -420,
+            y: -15,
+            rotate: -8,
+            duration: 0.75,
+            ease: "power2.inOut",
+            delay: 0.3,
+            scrollTrigger: picWrapper.value,            
+        }) 
+        
+        gsap.to(linkedin.value, {
+            x: -400,
+            y: 70,
+            rotate: -11,
+            duration: 0.75,
+            ease: "power2.inOut",
+            delay: 0.35,
+            scrollTrigger: picWrapper.value,            
+        })  
     })
 
     const hoverNav = (e) => {
@@ -243,6 +309,26 @@
             x: 350,
             y: 0,
             duration: 0.1
+        })
+    }
+
+    const emailHover = (e) => {
+        gsap.killTweensOf(e.target);        
+        gsap.to(e.target, {
+            x: "-=10",  // Relativ zur aktuellen Position
+            y: "-=10",
+            duration: 0,
+            ease: "power2.out"
+        })
+    }
+
+    const emailLeave = (e) => {
+        gsap.killTweensOf(e.target);
+        gsap.to(e.target, {
+            x: "+=10",  // Zurück zur ursprünglichen Position
+            y: "+=10",
+            duration: 0.1,
+            ease: "power2.out"
         })
     }
 
@@ -336,9 +422,9 @@
 
                             </div>
                         </div>
-                <div class="mt-[15rem] flex items-center flex-col relative">
+                <div class="mt-[10rem] h-[50rem] flex items-center flex-col relative">
                     <h2 class="font-kavoon text-[3rem]"><span class="text-[#D65108]">ÜBER</span> <span class="text-[#591F0A]">MICH</span></h2>
-                    <div ref="picWrapper" class="p-[1rem] bg-[#EFA00B] rounded-lg relative mt-[8rem] z-20 hover:shadow-[10px_10px_0px_0px_rgba(0,_0,_0,_1)] hover:duration-300" @mouseenter="picHover" @mouseleave="picLeave"> 
+                    <div ref="picWrapper" class="p-[1rem] bg-[#EFA00B] rounded-lg relative mt-[8rem] z-20"> 
                         <img :src="bildGroß" alt="" class="rounded-lg w-[20rem]"/>
                             <svg ref="picScribble" class="absolute top-[3.5rem] right-[7.8rem] z-10 scale-[145%]" width="71" height="90" viewBox="0 0 71 90" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M2.09237 53.9853C1.29379 53.9853 0.682763 51.9889 1.17885 43.6734C2.19451 26.6487 5.91585 13.8751 7.32546 10.4509C7.91664 9.01478 8.33578 8.22454 9.43987 10.9076C12.9919 19.5396 14.5913 30.3487 15.5956 33.4069C18.0444 40.8642 18.2212 18.0978 19.2254 17.9859C22.412 17.6308 21.6514 24.3291 22.1535 26.5434C22.3881 27.5775 22.8553 28.3583 23.4603 27.0727C28.4353 16.5008 32.1115 5.03024 35.7596 1.05249C36.7621 -0.0406517 37.3809 16.1437 38.482 31.6131C39.751 49.4425 48.8635 8.62383 51.48 6.80888C52.6027 6.03015 53.6973 6.1918 54.511 6.89056C59.6555 11.3084 57.9503 27.6807 58.2528 39.2934C58.4329 46.2075 62.772 21.9697 66.2083 16.6852C67.019 16.664 67.8175 18.0615 68.4286 21.3768C69.0396 24.6921 69.4389 29.8829 69.8503 35.2309" stroke="#33ADFF" stroke-width="2" stroke-linecap="round"/>
@@ -350,7 +436,7 @@
                     </div>
                     <div ref="profileInfo" class="w-[18rem] h-[13rem] bg-[#D65108] rounded-lg p-[1rem] absolute top-60 z-10" >
                         <div class="w-full h-full bg-[#591F0A] rounded-lg p-[1rem] font-taviraj">
-                            <div class="flex flex-col">
+                            <div class="flex flex-col pointer-events-none">
                                 <h3 class="font-kavoon text-[2rem] text-[#EFA00B]">Nico <span class="text-[#FFFAEF]">21</span></h3>
                                 <div class="flex flex-row items-center gap-3 mt-[1rem]">
                                     <Icon name="ic:round-school" class=" bg-[#D65108] w-[2rem] h-[2rem]"/>
@@ -363,23 +449,47 @@
                             </div>
                         </div>
                     </div>
-                    <div class="absolute top-60 font-taviraj text-[#FFFAEF]">
-                        <div ref="JS" class="bg-[#591F0A] w-[10rem] h-[4rem] rounded-lg flex flex-row items-center p-[1rem] gap-3 -z-10">
+                    <div class=" absolute top-60 font-taviraj text-[#FFFAEF] flex flex-col">
+                        <div ref="JS" class="bg-[#591F0A] w-[10rem] h-[4rem] rounded-lg flex flex-row items-center p-[1rem] gap-3 -z-10 ">
                             <Icon name="skill-icons:javascript" class="w-[2rem] h-[2rem]"/>
                             <p>Javascript</p>
                         </div>
-                        <div ref="nuxt" class="bg-[#EFA00B] w-[7rem] h-[4rem] rounded-lg flex flex-row items-center p-[1rem] gap-3 -z-10">
+                        <div ref="nuxt" class="bg-[#EFA00B] w-[7rem] h-[4rem] rounded-lg flex flex-row items-center p-[1rem] gap-3 -z-10 ">
                             <Icon name="skill-icons:nuxtjs-dark" class="w-[2rem] h-[2rem]"/>
                             <p>Nuxt</p>
                         </div>
-                        <div ref="vue" class="bg-[#D65108] w-[7rem] h-[4rem] rounded-lg flex flex-row items-center p-[1rem] gap-3 -z-10">
+                        <div ref="vue" class="bg-[#D65108] w-[7rem] h-[4rem] rounded-lg flex flex-row items-center p-[1rem] gap-3 -z-10 ">
                             <Icon name="devicon:vuejs" class="w-[2rem] h-[2rem]"/>
                             <p>Vue</p>
                         </div>
-                        <div ref="tailwind" class="bg-[#EFA00B] w-[9rem] h-[4rem] rounded-lg flex flex-row items-center p-[1rem] gap-3 -z-10">
+                        <div ref="tailwind" class="bg-[#EFA00B] w-[9rem] h-[4rem] rounded-lg flex flex-row items-center p-[1rem] gap-3 -z-10 ">
                             <Icon name="vscode-icons:file-type-tailwind" class="w-[2rem] h-[2rem]"/>
                             <p>Tailwind</p>
-                        </div>                           
+                        </div>  
+                        <div ref="strapi" class="bg-[#591F0A] w-[7rem] h-[4rem] rounded-lg flex flex-row items-center p-[1rem] gap-3 -z-10 ">
+                            <Icon name="logos:strapi-icon" class="w-[2rem] h-[2rem]"/>
+                            <p>Strapi</p>
+                        </div>
+                        <div ref="supabase" class="bg-[#D65108] w-[9rem] h-[4rem] rounded-lg flex flex-row items-center p-[1rem] gap-3 -z-10 ">
+                            <Icon name="skill-icons:supabase-dark" class="w-[2rem] h-[2rem]"/>
+                            <p>Supabase</p>
+                        </div>   
+                        <div ref="figma" class="bg-[#D65108] w-[9rem] h-[4rem] rounded-lg flex flex-row items-center p-[1rem] gap-3 -z-10 ">
+                            <Icon name="skill-icons:figma-dark" class="w-[2rem] h-[2rem]"/>
+                            <p>Figma</p>
+                        </div>  
+                        <div ref="email" class="bg-[#33ADFF] w-[7.5rem] h-[4rem] rounded-lg flex flex-row items-center p-[1rem] gap-3 z-0 absolute top-[3rem] right-[5rem] hover:shadow-[10px_10px_0px_0px_rgba(0,_0,_0,_1)] hover:duration-200" @mouseenter="emailHover" @mouseleave="emailLeave">
+                            <Icon name="dashicons:email" class="w-[2rem] h-[2rem]"/>
+                            <p>Email</p>
+                        </div> 
+                        <div ref="github" class="bg-[#0267C1] w-[8rem] h-[4rem] rounded-lg flex flex-row items-center p-[1rem] gap-3 z-0 absolute top-[4rem] right-[5rem] hover:shadow-[10px_10px_0px_0px_rgba(0,_0,_0,_1)] hover:duration-200" @mouseenter="emailHover" @mouseleave="emailLeave">
+                            <Icon name="ri:github-fill" class="w-[2rem] h-[2rem]"/>
+                            <p>Github</p>
+                        </div>                                                                                                     
+                        <div ref="linkedin" class="bg-[#33ADFF] w-[9rem] h-[4rem] rounded-lg flex flex-row items-center p-[1rem] gap-3 z-0 absolute top-[5rem] right-[5rem] hover:shadow-[10px_10px_0px_0px_rgba(0,_0,_0,_1)] hover:duration-200" @mouseenter="emailHover" @mouseleave="emailLeave">
+                            <Icon name="mdi:linkedin" class="w-[2rem] h-[2rem]"/>
+                            <p>LinkedIn</p>
+                        </div>  
                     </div>
                 </div>     
             </div>
