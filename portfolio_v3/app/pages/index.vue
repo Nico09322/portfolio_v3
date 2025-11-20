@@ -41,17 +41,19 @@
     const linkedin = ref(null);
     const ueberMich = ref(null);
     const card = ref([]);
+    const config = useRuntimeConfig();
+    const projekte = ref(null);
     
     let smoother;
-
-    const {data: projects} = useFetch("https://effortless-courage-3e867d4d9f.strapiapp.com/api/projects?populate=*", 
-        {
+    
+    const { data: projects } = await useAsyncData('projects', () => 
+        $fetch("https://effortless-courage-3e867d4d9f.strapiapp.com/api/projects?populate=*", {
             headers: {
-                Authorization: `Bearer ${process.env.TOKEN}`
+            Authorization: `Bearer ${config.strapiToken}`
             }
-        }
-    )
-
+        })
+    );
+    
 
 
 
@@ -70,15 +72,15 @@
             smooth: 0.7
         });
 
-        const projektContainer = document.querySelector('.projekt-container'); // Füge diese Klasse hinzu
-    
+        const projektContainer = document.querySelector('.projekt-container');
+
         if (projektContainer) {
             gsap.to(projektContainer, {
                 x: () => -(projektContainer.scrollWidth - window.innerWidth),
                 ease: "none",
                 scrollTrigger: {
                     trigger: projektContainer,
-                    start: "top 10%",
+                    start: "top 20%",
                     end: () => `+=${projektContainer.scrollWidth - window.innerWidth}`,
                     scrub: 1,
                     pin: true,
@@ -359,7 +361,7 @@
     const emailHover = (e) => {
         gsap.killTweensOf(e.target);        
         gsap.to(e.target, {
-            x: "-=10",  // Relativ zur aktuellen Position
+            x: "-=10", 
             y: "-=10",
             duration: 0,
             ease: "power2.out"
@@ -369,7 +371,7 @@
     const emailLeave = (e) => {
         gsap.killTweensOf(e.target);
         gsap.to(e.target, {
-            x: "+=10",  // Zurück zur ursprünglichen Position
+            x: "+=10", 
             y: "+=10",
             duration: 0.1,
             ease: "power2.out"
@@ -381,7 +383,11 @@
     }
 
     const clickAbout = () => {
-        smoother.scrollTo(ueberMich.value, true)
+        smoother.scrollTo(ueberMich.value, true, "top 20%")
+    }
+
+    const clickProjekt = () => {
+        smoother.scrollTo(projekte.value, true, "top 15%")
     }
 
     const openGit = () => {
@@ -403,7 +409,7 @@
             <div id="smooth-content">
                 <div class="w-full h-[5rem] flex flex-row place-content-between gap-[3rem] items-center pr-[3rem] pl-[1rem]">
                             <div ref="profilePic" class="w-[3.5rem] h-[3.5rem] bg-[#EFA00B] rounded-full flex items-center justify-center">
-                                <img :src="bild" class="w-[2.9rem] rounded-full"/>
+                                <img :src="bild" alt="" class="w-[2.9rem] rounded-full"/>
                             </div>
                             <div ref="nav" class="flex flex-row gap-[3rem] font-taviraj text-[#454545]">
                                 <div @click="clickHome" class="cursor-pointer group hover:scale-110 duration-150">
@@ -422,7 +428,7 @@
                                     <span class="group-hover:text-[#591F0A] duration-150">C</span>
                                     <span class="group-hover:text-[#0267C1] duration-150">H</span>                                    
                                 </div>
-                                <div @click="clickHome" class="cursor-pointer group hover:scale-110 duration-150">
+                                <div @click="clickProjekt" class="cursor-pointer group hover:scale-110 duration-150">
                                     <span class="group-hover:text-[#EFA00B] duration-150">P</span>
                                     <span class="group-hover:text-[#D65108] duration-150">R</span>
                                     <span class="group-hover:text-[#591F0A] duration-150">O</span>
@@ -437,7 +443,7 @@
                         <div ref="navDivider" class="w-full h-[0.15rem] bg-[#F5F0E4]"></div>
                         <div class="flex flex-col gap-[2rem] justify-center items-center w-full h-[100vh]">
                             <div class="overflow-hidden">
-                                <h1 ref="headline" class="font-raleway font-black text-[16vw] text-[#454545] leading-[1]">
+                                <h1 ref="headline" class="font-raleway font-black text-[16vw] text-[#454545] leading-[0.9]">
                                     <div class="relative inline-block">
                                         <span class="absolute text-[#0267C1] left-0 ">P</span>
                                         <span @pointerenter="hoverHeadline" @pointerleave="leaveHeadline" class="">P</span>
@@ -579,9 +585,10 @@
                 <div class="mt-[10rem]">
 
                     <div class="projekt-wrapper overflow-hidden mb-[5rem]">
+                        <h2 ref="projekte" class="flex justify-center font-kavoon text-[3rem] text-[#D65108] w-full">PROJEKTE</h2> 
                         <div class="projekt-container flex flex-col">
-                            <h2 class="flex justify-center font-kavoon text-[3rem] text-[#D65108]">PROJEKTE</h2>
-                            <div class="flex flex-row gap-[2rem] h-[100vh] mt-[5rem] ml-[5rem] pr-[10rem]">
+                           
+                            <div class="flex flex-row gap-[3rem] h-[100vh] mt-[5rem] mr-[5rem] ml-[5rem]">
                                 <Projekt ref="card" v-for="project in projects.data" :name="project.Title" :url="project.Hero.url" :desc="project.Description" :skills="project.Skills"/>                            
                             </div>
 
