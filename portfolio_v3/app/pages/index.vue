@@ -7,11 +7,10 @@
     import bild from "./assets/img/Nico_Pies_Bewerbungsfoto.jpg"
     import bildGroß from "./assets/img/Nico_Pies_foto_groß.jpg"
 
-    
-    gsap.registerPlugin(ScrollTrigger);
-    gsap.registerPlugin(ScrollSmoother); 
-    gsap.registerPlugin(DrawSVGPlugin); 
-    gsap.registerPlugin(SplitText);
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.registerPlugin(ScrollSmoother); 
+        gsap.registerPlugin(DrawSVGPlugin); 
+        gsap.registerPlugin(SplitText);
 
     const headline = ref(null);
     const splitHeadline = ref(null);
@@ -41,24 +40,32 @@
     const linkedin = ref(null);
     const ueberMich = ref(null);
     const card = ref([]);
-    const config = useRuntimeConfig();
     const projekte = ref(null);
-    
+    const loaded = ref(false);
+    const projectData = ref(null);    
     let smoother;
-    
-    const { data: projects } = await useAsyncData('projects', () => 
-        $fetch("https://effortless-courage-3e867d4d9f.strapiapp.com/api/projects?populate=*", {
-            headers: {
-            Authorization: `Bearer ${config.strapiToken}`
-            }
-        })
-    );
-    
 
-
-
+    const loadData = async () => {
+        console.log('🔵 loadData wird aufgerufen');
+        
+        try {
+            const response = await $fetch('/api/projects');
+            console.log('✅ Response:', response);
+            projectData.value = response;
+            loaded.value = true;
+            console.log(projectData.value)
+        } catch (err) {
+            console.error('❌ Error:', err);
+            loaded.value = true;
+        }
+    }
 
     onMounted(() =>{
+
+            
+        loadData()
+
+
         mounted.value = true;
         splitHeadline.value = SplitText.create(headline.value, {type: "chars"});
         splitName.value = SplitText.create(name.value,{type: "words"} );
@@ -576,7 +583,7 @@
                             <Icon name="ri:github-fill" class="w-[2rem] h-[2rem]"/>
                             <p>Github</p>
                         </div>                                                                                                     
-                        <div ref="linkedin" class="bg-[#33ADFF] w-[9rem] h-[4rem] rounded-lg flex flex-row items-center p-[1rem] gap-3 z-0 absolute top-[5rem] right-[5rem] hover:shadow-[10px_10px_0px_0px_rgba(0,_0,_0,_1)] hover:duration-200" @mouseenter="emailHover" @mouseleave="emailLeave" @click="openLinkedIn">
+                        <div ref="linkedin" class="bg-[#33ADF] w-[9rem] h-[4rem] rounded-lg flex flex-row items-center p-[1rem] gap-3 z-0 absolute top-[5rem] right-[5rem] hover:shadow-[10px_10px_0px_0px_rgba(0,_0,_0,_1)] hover:duration-200" @mouseenter="emailHover" @mouseleave="emailLeave" @click="openLinkedIn">
                             <Icon name="mdi:linkedin" class="w-[2rem] h-[2rem]"/>
                             <p>LinkedIn</p>
                         </div>  
@@ -589,7 +596,7 @@
                         <div class="projekt-container flex flex-col">
                            
                             <div class="flex flex-row gap-[3rem] h-[100vh] mt-[5rem] mr-[5rem] ml-[5rem]">
-                                <Projekt ref="card" v-for="project in projects.data" :name="project.Title" :url="project.Hero.url" :desc="project.Description" :skills="project.Skills"/>                            
+                                <Projekt ref="card" v-if="projectData?.data" v-for="project in projectData.data" :name="project.Title" :url="project.Hero.url" :desc="project.Description" :skills="project.Skills"/>                            
                             </div>
 
                         </div> 
