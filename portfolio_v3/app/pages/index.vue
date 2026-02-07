@@ -80,19 +80,29 @@
         const projektContainer = document.querySelector('.projekt-container');
 
         if (projektContainer) {
-            gsap.to(projektContainer, {
-                x: () => -(projektContainer.scrollWidth - window.innerWidth),
-                ease: "none",
-                scrollTrigger: {
-                    trigger: projektContainer,
-                    start: "top 20%",
-                    end: () => `+=${projektContainer.scrollWidth - window.innerWidth}`,
-                    scrub: 1,
-                    pin: true,
-                    anticipatePin: 1,
-                    invalidateOnRefresh: true
-                }
+            const totalWidth = projektContainer.scrollWidth * 4;
+            
+            // Erstelle eine Loop-Animation
+           const track = projektContainer.querySelector('.projekt-container > div');
+
+            const loopTween = gsap.to(track, {
+            x: -totalWidth / 2,
+            duration: 20,
+            ease: "none",
+            repeat: -1,
+            modifiers: {
+                x: gsap.utils.unitize(x => parseFloat(x) % (totalWidth / 2))
+            }
             });
+
+            projektContainer.addEventListener('mouseenter', () => {
+                gsap.to(loopTween, { timeScale: 0, duration: 0.4 });
+            });
+
+            projektContainer.addEventListener('mouseleave', () => {
+                gsap.to(loopTween, { timeScale: 1, duration: 0.2 });
+            });
+
         }
 
 
@@ -581,7 +591,7 @@
                             <Icon name="ri:github-fill" class="w-[2rem] h-[2rem]"/>
                             <p>Github</p>
                         </div>                                                                                                     
-                        <div ref="linkedin" class="bg-[#33ADF] w-[9rem] h-[4rem] rounded-lg flex flex-row items-center p-[1rem] gap-3 z-0 absolute top-[5rem] right-[5rem] hover:shadow-[10px_10px_0px_0px_rgba(0,_0,_0,_1)] hover:duration-200" @mouseenter="emailHover" @mouseleave="emailLeave" @click="openLinkedIn">
+                        <div ref="linkedin" class="bg-[#33ADFF] w-[9rem] h-[4rem] rounded-lg flex flex-row items-center p-[1rem] gap-3 z-0 absolute top-[5rem] right-[5rem] hover:shadow-[10px_10px_0px_0px_rgba(0,_0,_0,_1)] hover:duration-200" @mouseenter="emailHover" @mouseleave="emailLeave" @click="openLinkedIn">
                             <Icon name="mdi:linkedin" class="w-[2rem] h-[2rem]"/>
                             <p>LinkedIn</p>
                         </div>  
@@ -591,10 +601,11 @@
 
                     <div class="projekt-wrapper overflow-hidden mb-[5rem]">
                         <h2 ref="projekte" class="flex justify-center font-kavoon text-[3rem] text-[#D65108] w-full">PROJEKTE</h2> 
-                        <div class="projekt-container flex flex-col">
-                           
-                            <div class="flex flex-row gap-[3rem] h-[100vh] mt-[5rem] mr-[5rem] ml-[5rem]">
-                                <Projekt ref="card" v-if="projectData?.data" v-for="project in projectData.data" :name="project.Title" :url="project.Hero.url" :desc="project.Description" :skills="project.Skills"/>                            
+                        <div class="projekt-container relative mb-[10rem]">
+                            <div class="flex flex-row gap-[3rem] mt-[5rem] ml-[5rem]">
+                                <Projekt ref="card" v-if="projectData?.data" v-for="project in projectData.data" :name="project.Title" :url="project.Hero.url" :desc="project.Description" :skills="project.Skills"/>  
+                                <Projekt ref="card" v-if="projectData?.data" v-for="project in projectData.data" :name="project.Title" :url="project.Hero.url" :desc="project.Description" :skills="project.Skills"/> 
+                          
                             </div>
 
                         </div> 
