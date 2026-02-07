@@ -20,10 +20,10 @@ export default defineNuxtConfig({
   },
   routeRules: {
     '/': { 
-      swr: 3600 
+      isr: 3600 
     },
     '/api/projects': { 
-      swr: 3600 
+      isr: 3600 
     }
   }
 })
