@@ -10,7 +10,6 @@ export default defineEventHandler(async (event) => {
     
     return data;
   } catch (err: unknown) {
-    // Type guard für Error
     const error = err as { statusCode?: number; message?: string; data?: any };
     
     console.error('Strapi API Error:', error);

@@ -46,16 +46,14 @@
     let smoother;
 
     const loadData = async () => {
-        console.log('🔵 loadData wird aufgerufen');
+        console.log('loadData wird aufgerufen');
         
         try {
             const response = await $fetch('/api/projects');
-            console.log('✅ Response:', response);
             projectData.value = response;
             loaded.value = true;
-            console.log(projectData.value)
         } catch (err) {
-            console.error('❌ Error:', err);
+            console.error('Error:', err);
             loaded.value = true;
         }
     }
