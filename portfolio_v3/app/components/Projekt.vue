@@ -13,6 +13,8 @@
     })
 
     const root = ref(null);
+    const rotate = Math.floor(Math.random() * 10 -5);
+
 
     const hover = () => {
         gsap.to(root.value, {
@@ -50,7 +52,7 @@
 </script>
 
 <template>
-    <div ref="root" class="w-[40rem] h-[40rem]  p-[1rem] rounded-lg flex flex-col flex-shrink-0 hover:shadow-[10px_10px_0px_0px_rgba(0,_0,_0,_1)] hover:duration-200" :style="{backgroundColor: bgColor}" @mouseenter="hover" @mouseleave="leave">
+    <div ref="root" class="w-[40rem] h-[40rem] p-[1rem] rounded-lg flex flex-col flex-shrink-0 hover:shadow-[10px_10px_0px_0px_rgba(0,_0,_0,_1)] hover:duration-200" :style="{backgroundColor: bgColor, transform: `rotate(${rotate}deg`}" @mouseenter="hover" @mouseleave="leave">
         <img :src="props.url" class="rounded-lg" alt=""/>
         <div>
             <h3 class="font-kavoon text-[#FFFAEF] text-[2rem]">{{ props.name }}</h3>

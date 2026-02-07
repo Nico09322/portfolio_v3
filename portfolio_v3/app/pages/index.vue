@@ -47,7 +47,6 @@
 
     const loadData = async () => {
         console.log('loadData wird aufgerufen');
-        
         try {
             const response = await $fetch('/api/projects');
             projectData.value = response;
