@@ -44,6 +44,8 @@
     const loaded = ref(false);
     const projectData = ref(null);    
     let smoother;
+    const blender = ref(null);
+    const gsap2 = ref(null);
 
     const loadData = async () => {
         console.log('loadData wird aufgerufen');
@@ -285,13 +287,32 @@
             scrollTrigger: picWrapper.value,            
         }) 
 
+        gsap.to(blender.value, {
+            x: -320,
+            y: 190,
+            rotate: 8,
+            duration: 0.75,
+            ease: "power2.inOut",
+            delay: 0.2,
+            scrollTrigger: picWrapper.value,                
+        })
+
+        gsap.to(gsap2.value, {
+            x: 100,
+            y: -10,
+            rotate: -3,
+            duration: 0.75,
+            delay:0.2,
+            ease: "power2.inOut",
+            scrollTrigger: picWrapper.value,                
+        })
+
 
         card.value.forEach((cardComponent) => {
             if (cardComponent?.root) {
                 gsap.to(cardComponent.root, {
                     rotation: Math.floor(Math.random() * 10) - 3,
                     duration: 0,
-                    
                     ease: "power2.inOut",
                     scrollTrigger: cardComponent.root
                 });
@@ -541,7 +562,7 @@
                     <div ref="profileInfo" class="w-[18rem] h-[13rem] bg-[#D65108] rounded-lg p-[1rem] absolute top-60 z-10" >
                         <div class="w-full h-full bg-[#591F0A] rounded-lg p-[1rem] font-taviraj">
                             <div class="flex flex-col pointer-events-none">
-                                <h3 class="font-kavoon text-[2rem] text-[#EFA00B]">Nico <span class="text-[#FFFAEF]">21</span></h3>
+                                <h3 class="font-kavoon text-[2rem] text-[#EFA00B]">Nico <span class="text-[#FFFAEF]">22</span></h3>
                                 <div class="flex flex-row items-center gap-3 mt-[1rem]">
                                     <Icon name="ic:round-school" class=" bg-[#D65108] w-[2rem] h-[2rem]"/>
                                     <p class="text-[#FFFAEF]">FH Südwestfahlen</p>
@@ -578,22 +599,30 @@
                             <Icon name="skill-icons:supabase-dark" class="w-[2rem] h-[2rem]"/>
                             <p>Supabase</p>
                         </div>   
-                        <div ref="figma" class="bg-[#D65108] w-[9rem] h-[4rem] rounded-lg flex flex-row items-center p-[1rem] gap-3 -z-10 ">
+                        <div ref="figma" class="bg-[#D65108] w-[8rem] h-[4rem] rounded-lg flex flex-row items-center p-[1rem] gap-3 -z-10 ">
                             <Icon name="skill-icons:figma-dark" class="w-[2rem] h-[2rem]"/>
                             <p>Figma</p>
                         </div>  
-                        <div ref="email" class="bg-[#33ADFF] w-[7.5rem] h-[4rem] rounded-lg flex flex-row items-center p-[1rem] gap-3 z-0 absolute top-[3rem] right-[5rem] hover:shadow-[10px_10px_0px_0px_rgba(0,_0,_0,_1)] hover:duration-200" @mouseenter="emailHover" @mouseleave="emailLeave" @click="openMail">
+                        <div ref="email" class="bg-[#33ADFF] w-[7.5rem] h-[4rem] rounded-lg flex flex-row items-center p-[1rem] gap-3 z-0 absolute top-[3rem] right-[5rem] cursor-pointer hover:shadow-[10px_10px_0px_0px_rgba(0,_0,_0,_1)] hover:duration-200" @mouseenter="emailHover" @mouseleave="emailLeave" @click="openMail">
                             <Icon name="dashicons:email" class="w-[2rem] h-[2rem]"/>
                             <p>Email</p>
                         </div> 
-                        <div ref="github" class="bg-[#0267C1] w-[8rem] h-[4rem] rounded-lg flex flex-row items-center p-[1rem] gap-3 z-0 absolute top-[4rem] right-[5rem] hover:shadow-[10px_10px_0px_0px_rgba(0,_0,_0,_1)] hover:duration-200" @mouseenter="emailHover" @mouseleave="emailLeave" @click="openGit">
+                        <div ref="github" class="bg-[#0267C1] w-[8rem] h-[4rem] rounded-lg flex flex-row items-center p-[1rem] gap-3 z-0 absolute top-[4rem] right-[5rem] cursor-pointer hover:shadow-[10px_10px_0px_0px_rgba(0,_0,_0,_1)] hover:duration-200" @mouseenter="emailHover" @mouseleave="emailLeave" @click="openGit">
                             <Icon name="ri:github-fill" class="w-[2rem] h-[2rem]"/>
                             <p>Github</p>
                         </div>                                                                                                     
-                        <div ref="linkedin" class="bg-[#33ADFF] w-[9rem] h-[4rem] rounded-lg flex flex-row items-center p-[1rem] gap-3 z-0 absolute top-[5rem] right-[5rem] hover:shadow-[10px_10px_0px_0px_rgba(0,_0,_0,_1)] hover:duration-200" @mouseenter="emailHover" @mouseleave="emailLeave" @click="openLinkedIn">
+                        <div ref="linkedin" class="bg-[#33ADFF] w-[9rem] h-[4rem] rounded-lg flex flex-row items-center p-[1rem] gap-3 z-0 absolute top-[5rem] cursor-pointer right-[5rem] hover:shadow-[10px_10px_0px_0px_rgba(0,_0,_0,_1)] hover:duration-200" @mouseenter="emailHover" @mouseleave="emailLeave" @click="openLinkedIn">
                             <Icon name="mdi:linkedin" class="w-[2rem] h-[2rem]"/>
                             <p>LinkedIn</p>
                         </div>  
+                        <div ref="blender" class="bg-[#EFA00B] w-[9rem] h-[4rem] rounded-lg flex flex-row items-center p-[1rem] gap-3 z-0 absolute top-[5rem] right-[5rem] " >
+                            <Icon name="logos:blender" class="w-[2rem] h-[2rem]"/>
+                            <p>Blender</p>
+                        </div>  
+                        <div ref="gsap2" class="bg-[#591F0A] w-[7.5rem] h-[4rem] rounded-lg flex flex-row items-center p-[1rem] gap-3 z-0 absolute top-[20rem] right-[5rem] " >
+                            <Icon name="simple-icons:gsap" class="w-[2rem] h-[2rem]"/>
+                            <p>GSAP</p>
+                        </div>                          
                     </div>
                 </div>
                 <div class="mt-[10rem]">
@@ -610,10 +639,6 @@
                         </div> 
                     </div>
                 </div> 
-
-  
             </div>
         </div>  
 </template>
-
-

@@ -14,8 +14,6 @@
 
     const root = ref(null);
     const rotate = Math.floor(Math.random() * 10 -5);
-
-
     const hover = () => {
         gsap.to(root.value, {
             x: "-=10",  // Relativ zur aktuellen Position
