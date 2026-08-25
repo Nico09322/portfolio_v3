@@ -47,6 +47,7 @@
     const blender = ref(null);
     const gsap2 = ref(null);
 
+    /*
     const loadData = async () => {
         console.log('loadData wird aufgerufen');
         try {
@@ -57,12 +58,12 @@
             console.error('Error:', err);
             loaded.value = true;
         }
-    }
+    } */
 
     onMounted(() =>{
 
             
-        loadData()
+        //loadData()
 
 
         mounted.value = true;
@@ -77,7 +78,8 @@
             content: "#smooth-content",
             smooth: 0.7
         });
-
+        
+        /*
         const projektContainer = document.querySelector('.projekt-container');
 
         if (projektContainer) {
@@ -105,6 +107,7 @@
             });
 
         }
+            */
 
 
         gsap.from(splitHeadline.value.chars, {
@@ -307,7 +310,7 @@
             scrollTrigger: picWrapper.value,                
         })
 
-
+        /*
         card.value.forEach((cardComponent) => {
             if (cardComponent?.root) {
                 gsap.to(cardComponent.root, {
@@ -317,7 +320,7 @@
                     scrollTrigger: cardComponent.root
                 });
             }
-        });
+        }); */
         
       
     })
@@ -630,11 +633,7 @@
                     <div class="projekt-wrapper overflow-hidden mb-[5rem]">
                         <h2 ref="projekte" class="flex justify-center font-kavoon text-[3rem] text-[#D65108] w-full">PROJEKTE</h2> 
                         <div class="projekt-container relative mb-[10rem]">
-                            <div class="flex flex-row gap-[3rem] mt-[5rem] ml-[5rem]">
-                                <Projekt ref="card" v-if="projectData?.data" v-for="project in projectData.data" :name="project.Title" :url="project.Hero.url" :desc="project.Description" :skills="project.Skills"/>  
-                                <Projekt ref="card" v-if="projectData?.data" v-for="project in projectData.data" :name="project.Title" :url="project.Hero.url" :desc="project.Description" :skills="project.Skills"/> 
-                          
-                            </div>
+
 
                         </div> 
                     </div>
