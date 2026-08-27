@@ -26,9 +26,9 @@
 <template>
     <div id="smooth-wrapper">
         <div id="smooth-content">
-            <article v-if="page" class="bg-[#FFFAEF] p-[2rem] text-[#454545] pl-[12.5%] pr-[12.5%]">
-                <div class="mb-[2rem] mt-[5rem]">
-                    <NuxtLink to="/#projekte">
+            <article v-if="page" class="bg-[#FFFAEF] p-[2rem] text-[#454545] pl-[12.5%] pr-[12.5%] pb-[5rem]">
+                <div class="mb-[2rem] mt-[5rem] cursor-[url('/pointer.svg'),_pointer]">
+                    <NuxtLink to="/#projekte" class="cursor-[url('/pointer.svg'),_pointer]">
                         <img src="../../assets/svg/back.svg" alt="zurück" class="hover:scale-150 duration-100 scale-125 pl-[1rem]"/>
                     </NuxtLink>
                 </div>
@@ -45,6 +45,7 @@
                     <img v-for="(img, i) in page.gallery" :key="img" :src="img" alt="`${page.title} ${i + 1}`" class="max-h-[25rem] rounded-lg "/>
                 </div>
             </article>
+            <Footer />
         </div>
     </div>
   

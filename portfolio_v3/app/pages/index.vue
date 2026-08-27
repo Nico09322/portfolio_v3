@@ -400,7 +400,7 @@
 </script>
 
 <template>
-        <div class="bg-[#FFFAEF] w-full h-[200vh]" id="smooth-wrapper">
+        <div class="bg-[#FFFAEF] w-full h-[200vh] " id="smooth-wrapper">
             <div id="smooth-content">
                         <div class="flex flex-col gap-[2rem] justify-center items-center w-full h-[100vh] z-0">
                             <div class="overflow-hidden">
@@ -491,7 +491,7 @@
                                 <h3 class="font-kavoon text-[2rem] text-[#EFA00B]">Nico <span class="text-[#FFFAEF]">22</span></h3>
                                 <div class="flex flex-row items-center gap-3 mt-[1rem]">
                                     <Icon name="ic:round-school" class=" bg-[#D65108] w-[2rem] h-[2rem]"/>
-                                    <p class="text-[#FFFAEF]">FH Südwestfahlen</p>
+                                    <p class="text-[#FFFAEF]">FH Südwestfalen</p>
                                 </div>
                                 <div class="flex flex-row items-center gap-3">
                                     <Icon name="tabler:map-pin-filled" class=" bg-[#D65108] w-[2rem] h-[2rem]"/>
@@ -529,15 +529,15 @@
                             <Icon name="skill-icons:figma-dark" class="w-[2rem] h-[2rem]"/>
                             <p>Figma</p>
                         </div>  
-                        <div ref="email" class="bg-[#33ADFF] w-[7.5rem] h-[4rem] rounded-lg flex flex-row items-center p-[1rem] gap-3 z-0 absolute top-[3rem] right-[5rem] cursor-pointer hover:shadow-[10px_10px_0px_0px_rgba(0,_0,_0,_1)] hover:duration-200" @mouseenter="emailHover" @mouseleave="emailLeave" @click="openMail">
+                        <div ref="email" class="bg-[#33ADFF] w-[7.5rem] h-[4rem] rounded-lg flex flex-row items-center p-[1rem] gap-3 z-0 absolute top-[3rem] right-[5rem]  cursor-[url('/pointer.svg'),_pointer] hover:shadow-[10px_10px_0px_0px_rgba(0,_0,_0,_1)] hover:duration-200" @mouseenter="emailHover" @mouseleave="emailLeave" @click="openMail">
                             <Icon name="dashicons:email" class="w-[2rem] h-[2rem]"/>
                             <p>Email</p>
                         </div> 
-                        <div ref="github" class="bg-[#0267C1] w-[8rem] h-[4rem] rounded-lg flex flex-row items-center p-[1rem] gap-3 z-0 absolute top-[4rem] right-[5rem] cursor-pointer hover:shadow-[10px_10px_0px_0px_rgba(0,_0,_0,_1)] hover:duration-200" @mouseenter="emailHover" @mouseleave="emailLeave" @click="openGit">
+                        <div ref="github" class="bg-[#0267C1] w-[8rem] h-[4rem] rounded-lg flex flex-row items-center p-[1rem] gap-3 z-0 absolute top-[4rem] right-[5rem]  cursor-[url('/pointer.svg'),_pointer] hover:shadow-[10px_10px_0px_0px_rgba(0,_0,_0,_1)] hover:duration-200" @mouseenter="emailHover" @mouseleave="emailLeave" @click="openGit">
                             <Icon name="ri:github-fill" class="w-[2rem] h-[2rem]"/>
                             <p>Github</p>
                         </div>                                                                                                     
-                        <div ref="linkedin" class="bg-[#33ADFF] w-[9rem] h-[4rem] rounded-lg flex flex-row items-center p-[1rem] gap-3 z-0 absolute top-[5rem] cursor-pointer right-[5rem] hover:shadow-[10px_10px_0px_0px_rgba(0,_0,_0,_1)] hover:duration-200" @mouseenter="emailHover" @mouseleave="emailLeave" @click="openLinkedIn">
+                        <div ref="linkedin" class="bg-[#33ADFF] w-[9rem] h-[4rem] rounded-lg flex flex-row items-center p-[1rem] gap-3 z-0 absolute top-[5rem]  cursor-[url('/pointer.svg'),_pointer] right-[5rem] hover:shadow-[10px_10px_0px_0px_rgba(0,_0,_0,_1)] hover:duration-200" @mouseenter="emailHover" @mouseleave="emailLeave" @click="openLinkedIn">
                             <Icon name="mdi:linkedin" class="w-[2rem] h-[2rem]"/>
                             <p>LinkedIn</p>
                         </div>  
@@ -559,7 +559,7 @@
                             <TransitionGroup name="stack" tag="div" class=" w-[65%] grid projekt-container relative mb-[10rem] mt-[5rem] place-items-center">
                                 <Projekt v-for="(p, index) in orderedObjects" :key="p.path" :index="index" :project="p" class=" col-start-1 row-start-1 " :style="{zIndex: orderedObjects.length - index}"/>
                             </TransitionGroup> 
-                            <button class="group" @click="cycleCards">
+                            <button class="group  cursor-[url('/pointer.svg'),_pointer]" @click="cycleCards">
                                 <div class="rounded-full flex justify-center items-center p-[0.5rem] flex-col">
                                     <img src="../assets/svg/weiter.svg" alt="weiter" class="group-hover:scale-110 transition-all duration-150 w-14 h-14"/>
                                     <img src="../assets/svg/nächstes.svg" alt="nächstes" class="scale-115 mt-[0.5rem]"/>
@@ -568,6 +568,7 @@
                         </div>
                     </div>
                 </div> 
+                <Footer />
             </div>
         </div>  
 </template>

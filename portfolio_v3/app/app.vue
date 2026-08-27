@@ -30,8 +30,9 @@ provide('registerTarget', registerTarget)
 </script>
 
 <template>
-  <div>
+  <div class="cursor-[url('/cursor.svg'),_auto]">
     <Nav />
     <NuxtPage />
+
   </div>
 </template>

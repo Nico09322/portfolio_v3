@@ -41,13 +41,13 @@
       <img src="../assets/img/Nico_Pies_Bewerbungsfoto.jpg" alt="" class="w-[2.9rem] rounded-full" />
     </div>
     <div ref="nav" class="flex flex-row gap-[3rem] font-taviraj text-[#454545]">
-      <div @click="goTo('home')" class="cursor-pointer group hover:scale-110 duration-150">
+      <div @click="goTo('home')" class=" cursor-[url('/pointer.svg'),_pointer] group hover:scale-110 duration-150">
         <span class="group-hover:text-[#EFA00B] duration-150">H</span>
         <span class="group-hover:text-[#D65108] duration-150">O</span>
         <span class="group-hover:text-[#591F0A] duration-150">M</span>
         <span class="group-hover:text-[#0267C1] duration-150">E</span>
       </div>
-      <div @click="goTo('ueberMich')" class="cursor-pointer group hover:scale-110 duration-150">
+      <div @click="goTo('ueberMich')" class=" cursor-[url('/pointer.svg'),_pointer] group hover:scale-110 duration-150">
         <span class="group-hover:text-[#EFA00B] duration-150">Ü</span>
         <span class="group-hover:text-[#D65108] duration-150">B</span>
         <span class="group-hover:text-[#591F0A] duration-150">E</span>
@@ -57,7 +57,7 @@
         <span class="group-hover:text-[#591F0A] duration-150">C</span>
         <span class="group-hover:text-[#0267C1] duration-150">H</span>
       </div>
-      <div @click="goTo('projekte')" class="cursor-pointer group hover:scale-110 duration-150">
+      <div @click="goTo('projekte')" class=" cursor-[url('/pointer.svg'),_pointer] group hover:scale-110 duration-150">
         <span class="group-hover:text-[#EFA00B] duration-150">P</span>
         <span class="group-hover:text-[#D65108] duration-150">R</span>
         <span class="group-hover:text-[#591F0A] duration-150">O</span>

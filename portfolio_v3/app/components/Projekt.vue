@@ -29,7 +29,7 @@
 </script>
 
 <template>
-  <NuxtLink :to="project.path" class="transition-all hover:rotate-0 duration-200 group w-[75%] rounded-lg p-[1rem] flex flex-col justify-center items-start rotate-[var(--r)]" :class="index > 0 ? 'pointer-events-none' : ''" :style="{backgroundColor: bgColor ,filter: `blur(${blurAmount}px)`, transform: transformValue}" @mouseenter="isHovered = true" @mouseleave="isHovered = false">
+  <NuxtLink :to="project.path" class="transition-all hover:rotate-0 duration-200 group w-[75%] rounded-lg p-[1rem] flex flex-col justify-center items-start rotate-[var(--r)]  cursor-[url('/pointer.svg'),_pointer]" :class="index > 0 ? 'pointer-events-none' : ''" :style="{backgroundColor: bgColor ,filter: `blur(${blurAmount}px)`, transform: transformValue}" @mouseenter="isHovered = true" @mouseleave="isHovered = false">
     <h3 class="font-kavoon text-[#FFFAEF] text-[2rem] mb-[0.5rem]">{{ project.title }}</h3>
     <p class="mb-[0.5rem] font-taviraj text-[#FFFAEF]">{{ project.description }}</p>
     <div class="flex flex-row gap-[1.5rem] mb-[1.5rem] w-[90%]">

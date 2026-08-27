@@ -13,7 +13,7 @@ skills:
     - name: "Figma"
       bild: "/_content/projekte/ScanChef/skills/devicon--figma.svg"
     - name: "Gitlab"
-      bild: "/_content/projekte/Scanchef/skills/devicon--gitlab.svg"    
+      bild: "/_content/projekte/ScanChef/skills/devicon--gitlab.svg"    
 ---
 
 Im Rahmen eines Softwareprojekts im 6. Semester habe ich mit meinem Team ScanChef entwickelt, eine App, die den Kühlschrankbestand, Rezepte und Einkaufsliste in einer gemeinsamen Datenstruktur zusammenführt. Produkte werden per Barcode-Scan erfasst statt manuell eingetragen, wodurch sich die Hürde für eine konsequent geführte Vorratsverwaltung deutlich verringert.
