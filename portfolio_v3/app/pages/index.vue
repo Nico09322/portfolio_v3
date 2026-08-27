@@ -6,6 +6,10 @@
     import { gsap } from "gsap";
     import bild from "./assets/img/Nico_Pies_Bewerbungsfoto.jpg"
     import bildGroß from "./assets/img/Nico_Pies_foto_groß.jpg"
+    const route = useRoute()
+    const registerSmoother = inject('registerSmoother')
+    const registerTarget = inject('registerTarget')
+    const scrollToSection = inject('scrollToSection')
 
         gsap.registerPlugin(ScrollTrigger);
         gsap.registerPlugin(ScrollSmoother); 
@@ -47,18 +51,18 @@
     const blender = ref(null);
     const gsap2 = ref(null);
 
-    /*
-    const loadData = async () => {
-        console.log('loadData wird aufgerufen');
-        try {
-            const response = await $fetch('/api/projects');
-            projectData.value = response;
-            loaded.value = true;
-        } catch (err) {
-            console.error('Error:', err);
-            loaded.value = true;
-        }
-    } */
+    const { data: projects } = await useAsyncData('projects', () =>
+        queryCollection('projects').order('order', 'ASC').all()
+    )
+
+    const orderedObjects = ref([...(projects.value || [])])
+
+    const cycleCards = () => {
+        const [first, ...rest] = orderedObjects.value
+        orderedObjects.value = [...rest, first]
+    }
+
+    const scrollTargets = {}
 
     onMounted(() =>{
 
@@ -73,42 +77,25 @@
         navChars.value = SplitText.create(navOpt.value, {type: "chars, lines"});
 
 
-        smoother = ScrollSmoother.create({
+        const smoother = ScrollSmoother.create({
             wrapper: '#smooth-wrapper',
             content: "#smooth-content",
             smooth: 0.7
         });
-        
-        /*
-        const projektContainer = document.querySelector('.projekt-container');
 
-        if (projektContainer) {
-            const totalWidth = projektContainer.scrollWidth * 4;
-            
-            // Erstelle eine Loop-Animation
-           const track = projektContainer.querySelector('.projekt-container > div');
+        registerSmoother(smoother)
+        registerTarget('ueberMich', ueberMich.value)
+        registerTarget('projekte', projekte.value)
 
-            const loopTween = gsap.to(track, {
-            x: -totalWidth / 2,
-            duration: 20,
-            ease: "none",
-            repeat: -1,
-            modifiers: {
-                x: gsap.utils.unitize(x => parseFloat(x) % (totalWidth / 2))
-            }
-            });
 
-            projektContainer.addEventListener('mouseenter', () => {
-                gsap.to(loopTween, { timeScale: 0, duration: 0.4 });
-            });
+        if (route.hash) {
+            const target = route.hash.replace('#', '')
+            setTimeout(() => {
 
-            projektContainer.addEventListener('mouseleave', () => {
-                gsap.to(loopTween, { timeScale: 1, duration: 0.2 });
-            });
-
+            scrollToSection(target)
+            history.replaceState(null, '', route.path)
+            }, 100)
         }
-            */
-
 
         gsap.from(splitHeadline.value.chars, {
             duration: 0.5,
@@ -309,30 +296,8 @@
             ease: "power2.inOut",
             scrollTrigger: picWrapper.value,                
         })
-
-        /*
-        card.value.forEach((cardComponent) => {
-            if (cardComponent?.root) {
-                gsap.to(cardComponent.root, {
-                    rotation: Math.floor(Math.random() * 10) - 3,
-                    duration: 0,
-                    ease: "power2.inOut",
-                    scrollTrigger: cardComponent.root
-                });
-            }
-        }); */
-        
-      
     })
 
-    const hoverNav = (e) => {
-        gsap.to(navChars.value.chars, {
-            y: -25,
-            duration: 0.3,
-            ease: "power2.inOut",
-            stagger: 0.05
-        })
-    }
 
     const leaveNav = (e) => {
         gsap.to(navChars.value.chars, {
@@ -416,18 +381,6 @@
         })
     }
 
-    const clickHome = () => {
-        smoother.scrollTo(0, true)
-    }
-
-    const clickAbout = () => {
-        smoother.scrollTo(ueberMich.value, true, "top 20%")
-    }
-
-    const clickProjekt = () => {
-        smoother.scrollTo(projekte.value, true, "top 15%")
-    }
-
     const openGit = () => {
         window.open("https://github.com/Nico09322", "_blank", "noopener,noreferrer")
     }
@@ -440,46 +393,16 @@
         window.open("https://www.linkedin.com/in/nico-pies-688228275/", "_blank", "noopener,noreferrer")
     }
 
+    onUnmounted(() => {
+        registerSmoother(null)
+    })
+
 </script>
 
 <template>
         <div class="bg-[#FFFAEF] w-full h-[200vh]" id="smooth-wrapper">
             <div id="smooth-content">
-                <div class="w-full h-[5rem] flex flex-row place-content-between gap-[3rem] items-center pr-[3rem] pl-[1rem]">
-                            <div ref="profilePic" class="w-[3.5rem] h-[3.5rem] bg-[#EFA00B] rounded-full flex items-center justify-center">
-                                <img :src="bild" alt="" class="w-[2.9rem] rounded-full"/>
-                            </div>
-                            <div ref="nav" class="flex flex-row gap-[3rem] font-taviraj text-[#454545]">
-                                <div @click="clickHome" class="cursor-pointer group hover:scale-110 duration-150">
-                                    <span class="group-hover:text-[#EFA00B] duration-150">H</span>
-                                    <span class="group-hover:text-[#D65108] duration-150">O</span>
-                                    <span class="group-hover:text-[#591F0A] duration-150">M</span>
-                                    <span class="group-hover:text-[#0267C1] duration-150">E</span>
-                                </div>
-                                <div @click="clickAbout" class="cursor-pointer group hover:scale-110 duration-150">
-                                    <span class="group-hover:text-[#EFA00B] duration-150">Ü</span>
-                                    <span class="group-hover:text-[#D65108] duration-150">B</span>
-                                    <span class="group-hover:text-[#591F0A] duration-150">E</span>
-                                    <span class="group-hover:text-[#0267C1] duration-150">R</span>&nbsp;
-                                    <span class="group-hover:text-[#EFA00B] duration-150">M</span>
-                                    <span class="group-hover:text-[#D65108] duration-150">I</span>
-                                    <span class="group-hover:text-[#591F0A] duration-150">C</span>
-                                    <span class="group-hover:text-[#0267C1] duration-150">H</span>                                    
-                                </div>
-                                <div @click="clickProjekt" class="cursor-pointer group hover:scale-110 duration-150">
-                                    <span class="group-hover:text-[#EFA00B] duration-150">P</span>
-                                    <span class="group-hover:text-[#D65108] duration-150">R</span>
-                                    <span class="group-hover:text-[#591F0A] duration-150">O</span>
-                                    <span class="group-hover:text-[#0267C1] duration-150">J</span>
-                                    <span class="group-hover:text-[#EFA00B] duration-150">E</span>
-                                    <span class="group-hover:text-[#D65108] duration-150">K</span>
-                                    <span class="group-hover:text-[#591F0A] duration-150">T</span>
-                                    <span class="group-hover:text-[#0267C1] duration-150">E</span>                                    
-                                </div>
-                            </div>
-                </div>
-                        <div ref="navDivider" class="w-full h-[0.15rem] bg-[#F5F0E4]"></div>
-                        <div class="flex flex-col gap-[2rem] justify-center items-center w-full h-[100vh]">
+                        <div class="flex flex-col gap-[2rem] justify-center items-center w-full h-[100vh] z-0">
                             <div class="overflow-hidden">
                                 <h1 ref="headline" class="font-raleway font-black text-[16vw] text-[#454545] leading-[0.9]">
                                     <div class="relative inline-block">
@@ -632,10 +555,17 @@
 
                     <div class="projekt-wrapper overflow-hidden mb-[5rem]">
                         <h2 ref="projekte" class="flex justify-center font-kavoon text-[3rem] text-[#D65108] w-full">PROJEKTE</h2> 
-                        <div class="projekt-container relative mb-[10rem]">
-
-
-                        </div> 
+                        <div class="flex flex-row justify-center items-center">
+                            <TransitionGroup name="stack" tag="div" class=" w-[65%] grid projekt-container relative mb-[10rem] mt-[5rem] place-items-center">
+                                <Projekt v-for="(p, index) in orderedObjects" :key="p.path" :index="index" :project="p" class=" col-start-1 row-start-1 " :style="{zIndex: orderedObjects.length - index}"/>
+                            </TransitionGroup> 
+                            <button class="group" @click="cycleCards">
+                                <div class="rounded-full flex justify-center items-center p-[0.5rem] flex-col">
+                                    <img src="../assets/svg/weiter.svg" alt="weiter" class="group-hover:scale-110 transition-all duration-150 w-14 h-14"/>
+                                    <img src="../assets/svg/nächstes.svg" alt="nächstes" class="scale-115 mt-[0.5rem]"/>
+                                </div>
+                            </button>
+                        </div>
                     </div>
                 </div> 
             </div>
