@@ -488,7 +488,7 @@
                     <div ref="profileInfo" class="w-[18rem] h-[13rem] bg-[#D65108] rounded-lg p-[1rem] absolute top-60 z-10" >
                         <div class="w-full h-full bg-[#591F0A] rounded-lg p-[1rem] font-taviraj">
                             <div class="flex flex-col pointer-events-none">
-                                <h3 class="font-kavoon text-[2rem] text-[#EFA00B]">Nico <span class="text-[#FFFAEF]">22</span></h3>
+                                <h3 class="font-kavoon text-[2rem] text-[#EFA00B]">Nico <span class="text-[#FFFAEF]">22</span><a class="ml-[1rem] text-[1rem] bg-[#33ADFF] rounded-lg p-[0.5rem] text-[#FFFAEF] cursor-[url('/pointer.svg'),_pointer] z-30 pointer-events-auto" href="/Nico_Pies_Lebenslauf.pdf" download="Nico_Pies_Lebenslauf.pdf">CV</a></h3>
                                 <div class="flex flex-row items-center gap-3 mt-[1rem]">
                                     <Icon name="ic:round-school" class=" bg-[#D65108] w-[2rem] h-[2rem]"/>
                                     <p class="text-[#FFFAEF]">FH Südwestfalen</p>
