@@ -37,8 +37,8 @@
 
 <template>
   <div class="bg-[#FFFAEF] w-full fixed h-[5rem] flex flex-row place-content-between gap-[3rem] items-center pr-[3rem] pl-[1rem] z-40">
-    <div ref="profilePic" class="w-[3.5rem] h-[3.5rem] bg-[#EFA00B] rounded-full flex items-center justify-center">
-      <img src="../assets/img/Nico_Pies_Bewerbungsfoto.jpg" alt="" class="w-[2.9rem] rounded-full" />
+    <div ref="profilePic" class="hidden lg:flex lg:w-[3.5rem] lg:h-[3.5rem] bg-[#EFA00B] rounded-full items-center justify-center">
+        <img src="../assets/img/Nico_Pies_Bewerbungsfoto.jpg" alt="profile" class="w-[2.9rem] rounded-full" />
     </div>
     <div ref="nav" class="flex flex-row gap-[3rem] font-taviraj text-[#454545]">
       <div @click="goTo('home')" class=" cursor-[url('/pointer.svg'),_pointer] group hover:scale-110 duration-150">
