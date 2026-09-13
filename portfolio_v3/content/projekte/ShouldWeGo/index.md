@@ -4,10 +4,10 @@ description: "ShouldWeGo ist eine Webseite für Bergsteiger:innen, die alle ents
 image: "/_content/projekte/ShouldWeGo/cover.webp"
 order: 1
 gallery:
-    - "/_content/projekte/ShouldWeGo/Bilder/Home.jpg"  
-    - "/_content/projekte/ShouldWeGo/Bilder/Search.jpg"      
-    - "/_content/projekte/ShouldWeGo/Bilder/Mountain.jpg"      
-    - "/_content/projekte/ShouldWeGo/Bilder/Styleguide.jpg"      
+    - "/_content/projekte/ShouldWeGo/Bilder/Home.png"  
+    - "/_content/projekte/ShouldWeGo/Bilder/Search.png"      
+    - "/_content/projekte/ShouldWeGo/Bilder/Mountain.png"      
+    - "/_content/projekte/ShouldWeGo/Bilder/Styleguide.png"      
 skills:
 
     - name: "Figma"
