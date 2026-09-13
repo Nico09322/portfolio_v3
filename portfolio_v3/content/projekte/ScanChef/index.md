@@ -2,7 +2,7 @@
 title: "ScanChef"
 description: "Im Rahmen eines Softwareprojekts im 6. Semester sollte in Kleingruppen ein Softwareprodukt konzipiert und entwickelt werden. Dabei sollten branchenübliche Methoden wie Versionierung mit Git und wöchentliche Scrum-Meetings erprobt werden. Meine Rolle bestand im Frontend-Design in Figma und der Frontend-Entwicklung in Swift."
 image: "/_content/projekte/ScanChef/cover.webp"
-order: 1
+order: 2
 gallery:
     - "/_content/projekte/ScanChef/Bilder/Plakat.jpg"
     - "/_content/projekte/ScanChef/Bilder/Styleguide.jpg"

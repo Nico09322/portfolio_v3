@@ -15,15 +15,15 @@
     const profilePic = ref(null)
     const navDivider = ref(null)
 
-    // Wird von index.vue bereitgestellt, falls wir dort sind (Smoother existiert)
+   
     const scrollToSection = inject('scrollToSection', null)
 
     function goTo(target) {
     if (scrollToSection) {
-        // Wir sind auf der Home-Page, Smoother ist verfügbar
+        
         scrollToSection(target)
     } else {
-        // Wir sind auf einer anderen Seite, erst zurück navigieren
+        
         navigateTo(`/#${target}`)
     }
     }
